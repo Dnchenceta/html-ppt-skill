@@ -78,6 +78,38 @@ If the user gives you rich content upfront, derive these from it and
 propose your conclusions for confirmation. Do NOT start coding until
 the user confirms or corrects.**
 
+### Step 0: Assess input quality & content source
+
+**Evaluate what the user provided before asking anything:**
+
+| Input type | LLM role | Action |
+|---|---|---|
+| **一句话要求**（"做个技术分享"） | 创作者（从知识库生成） | 走 Step 1–4 全部确认，大纲必须用户审核 |
+| **大纲 / 要点列表** | 组织者（结构化 + 扩写） | 推导意图/受众/时长，确认主题和页数后开始 |
+| **论文 / 文档 / 长文** | 提炼者（提取 + 重组） | 直接从内容推导结构，仅确认主题/风格/交付方式 |
+| **已有 PPT 要求重做** | 迁移者（内容保留，换皮肤） | 提取原有结构，仅确认新主题/风格/新增需求 |
+
+**Derive from content if available:**
+- **Topic & depth** — 从标题/摘要/章节推断主题深度和技术栈
+- **Audience** — 从内容复杂度推断受众水平（入门/进阶/专家）
+- **Key data points** — 提取论文/文档中的图表、数据、代码作为优先素材
+- **Natural structure** — 用原文档的章节映射为 PPT section
+
+**If input is thin (one sentence), you MUST ask for:**
+- 用途 / 场景（决定模板）
+- 受众是谁（决定深度和风格）
+- 时长或页数（决定内容量）
+- 有没有参考资料/论文/大纲/数据（决定内容来源）
+
+A good response to thin input:
+> 我可以帮你做这份 PPT！先确认几件事：
+> 1. **用途 / 时长**：技术分享？大概讲多久（5min / 20min / 45min）？
+> 2. **受众**：给谁讲（团队内部 / 对外 / 投资人 / 学生）？
+> 3. **素材**：有没有论文、文档、大纲、数据可以给我参考？
+>    — 有素材的话内容会更准确，我来帮你提炼。
+>    — 没有的话我基于公开知识做，但建议你后续核实技术细节。
+> 4. **风格偏好**：深色技术风（`tokyo-night`）还是浅色正式风（`corporate-clean`）？
+
 ### Step 1: Identify intent & scenario
 
 Ask or derive:
@@ -132,8 +164,17 @@ cover → [toc] → section-1 → [2-4 content] → section-2 → [2-4 content] 
 Name each slide: "Slide 3: 问题背景", "Slide 7: 方案架构".
 This catches scope creep before any HTML is written.
 
-A good intake confirmation message looks like:
+**If user provided rich content (论文/文档/大纲):**
+Show how the content maps to the outline:
+> 基于你提供的论文，我规划了 10 页 PPT：
+> - Cover / Agenda（从论文标题和摘要提取）
+> - Section 1: 研究背景（对应论文 Introduction §1-2）
+> - Section 2: 系统架构（对应论文 Architecture §3，用 arch-diagram 布局）
+> - Section 3: 实验数据（对应论文 Evaluation §5，用 chart-bar 展示性能对比）
+> - …
+> 看看这个结构有没有遗漏或需要调整的？
 
+A good intake confirmation message (for thin input):
 > 我可以帮你做这份 PPT！先确认四件事：
 > 1. **用途 / 时长**：技术分享，约 20 分钟，对吧？
 > 2. **受众**：团队内部工程师？
@@ -143,6 +184,8 @@ A good intake confirmation message looks like:
 > 确认后我就开始动手。
 
 Only proceed to scaffold after user confirmation (or if user explicitly says "做吧，不用确认了").
+
+
 
 ## 🧭 Layout Selection Guide
 
