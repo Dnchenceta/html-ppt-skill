@@ -29,68 +29,203 @@ One command, no build. Pure static HTML/CSS/JS with only CDN webfonts.
 - **Showcase decks** for themes / layouts / animations / full-decks gallery
 - **Headless Chrome render script** for PNG export
 
+## 📚 Quick Catalog (embedded — no network needed)
+
+### 36 Themes
+**Light & calm:** `minimal-white` · `editorial-serif` · `soft-pastel` · `solarized-light` · `catppuccin-latte` · `xiaohongshu-white`
+
+**Bold & statement:** `sharp-mono` · `neo-brutalism` · `bauhaus` · `swiss-grid` · `memphis-pop`
+
+**Cool & dark:** `catppuccin-mocha` · `dracula` · `tokyo-night` · `nord` · `gruvbox-dark` · `rose-pine` · `arctic-cool`
+
+**Warm & vibrant:** `sunset-warm` · `midcentury` · `retro-tv`
+
+**Effect-heavy:** `glassmorphism` · `aurora` · `rainbow-gradient` · `blueprint` · `terminal-green` · `cyberpunk-neon` · `vaporwave` · `y2k-chrome`
+
+**Corporate / professional:** `corporate-clean` · `pitch-deck-vc` · `academic-paper` · `news-broadcast` · `engineering-whiteprint` · `magazine-bold` · `japanese-minimal`
+
+### 31 Layouts
+**Openers:** `cover` · `toc` · `section-divider`
+**Text:** `bullets` · `two-column` · `three-column` · `big-quote`
+**Data:** `stat-highlight` · `kpi-grid` · `table` · `chart-bar` · `chart-line` · `chart-pie` · `chart-radar`
+**Code:** `code` · `diff` · `terminal`
+**Diagrams:** `flow-diagram` · `arch-diagram` · `mindmap` · `timeline` · `roadmap` · `gantt` · `process-steps`
+**Comparison:** `comparison` · `pros-cons` · `todo-checklist`
+**Visuals:** `image-hero` · `image-grid`
+**Closers:** `cta` · `thanks`
+
+### 15 Full-Deck Templates
+**Extracted:** `xhs-white-editorial` · `graphify-dark-graph` · `knowledge-arch-blueprint` · `hermes-cyber-terminal` · `obsidian-claude-gradient` · `testing-safety-alert` · `xhs-pastel-card` · `dir-key-nav-minimal`
+**Scaffolds:** `pitch-deck` · `product-launch` · `tech-sharing` · `weekly-report` · `xhs-post` · `course-module` · `presenter-mode-reveal` 🎤
+
+### Top 10 CSS Animations
+`fade-up` (body entry) · `rise-in` (titles) · `stagger-list` (bullets/grids) · `blur-in` (cover) · `counter-up` (KPIs) · `glitch-in` (tech) · `parallax-tilt` (hover cards) · `confetti-burst` (thanks) · `kenburns` (image hero) · `page-turn-3d` (editorial)
+
+### Canvas FX (add `<script src="../assets/animations/fx-runtime.js"></script>`)
+`particle-burst` · `confetti-cannon` · `firework` · `starfield` · `matrix-rain` · `knowledge-graph` · `neural-net` · `constellation` · `galaxy-swirl` · `typewriter-multi` · `counter-explosion`
+
+For full detail, load: `references/themes.md` · `references/layouts.md` · `references/animations.md` · `references/full-decks.md` · `references/presenter-mode.md` · `references/authoring-guide.md`
+
 ## When to use
 
 Use when the user asks for any kind of slide-based output or wants to turn
 text/notes into a presentable deck. Prefer this over building from scratch.
 
-### 🎤 Presenter Mode (演讲者模式 + 逐字稿)
+## 🌱 Deck Intake — 需求收集流程
 
-If the user mentions any of: **演讲 / 分享 / 讲稿 / 逐字稿 / speaker notes / presenter view / 演讲者视图 / 提词器**, or says things like "我要去给团队讲 xxx", "要做一场技术分享", "怕讲不流畅", "想要一份带逐字稿的 PPT" — **use the `presenter-mode-reveal` full-deck template** and write 150–300 words of 逐字稿 in each slide's `<aside class="notes">`.
+**Before writing a single slide, collect and confirm the following.
+If the user gives you rich content upfront, derive these from it and
+propose your conclusions for confirmation. Do NOT start coding until
+the user confirms or corrects.**
 
-See [references/presenter-mode.md](references/presenter-mode.md) for the full authoring guide including the 3 rules of speaker script writing:
-1. **不是讲稿，是提示信号** — 加粗核心词 + 过渡句独立成段
-2. **每页 150–300 字** — 2–3 分钟/页的节奏
-3. **用口语，不用书面语** — "因此"→"所以"，"该方案"→"这个方案"
+### Step 1: Identify intent & scenario
 
-All full-deck templates support the S key presenter mode (it's built into `runtime.js`). **S opens a new popup window with 4 magnetic cards**:
-- 🔵 **CURRENT** — pixel-perfect iframe preview of the current slide
-- 🟣 **NEXT** — pixel-perfect iframe preview of the next slide
-- 🟠 **SPEAKER SCRIPT** — large-font 逐字稿 (scrollable)
-- 🟢 **TIMER** — elapsed time + slide counter + prev/next/reset buttons
+Ask or derive:
+- **What is this deck for?** (技术分享 / 融资路演 / 周报 / 小红书图文 / 产品发布 / 课程教学 / …)
+- **How will it be delivered?** (现场演讲 / 录播 / 纯静态展示 / 小红书图文)
+- **Total duration?** (5min / 20min / 45min / 1h / 无所谓)
 
-Each card is **draggable by its header** and **resizable by the bottom-right corner handle**. Card positions/sizes persist to `localStorage` per deck. A "Reset layout" button restores the default arrangement.
+Map to a full-deck template candidate:
 
-**Why the previews are pixel-perfect**: each preview is an `<iframe>` that loads the actual deck HTML with a `?preview=N` query param; `runtime.js` detects this and renders only slide N with no chrome. So the preview uses the **same CSS, theme, fonts, and viewport as the audience view** — colors and layout are guaranteed identical.
+| Scenario | Recommended template |
+|---|---|
+| 技术分享 / 会议演讲 | `tech-sharing` or `presenter-mode-reveal` |
+| 融资路演 / VC meeting | `pitch-deck` or `pitch-deck-vc` |
+| 产品发布会 | `product-launch` |
+| 周报 / 状态同步 | `weekly-report` |
+| 小红书图文 (竖版) | `xhs-post` (3:4 810×1080) |
+| 课程教学模块 | `course-module` |
+| 代码 / 工具 review | `hermes-cyber-terminal` or `obsidian-claude-gradient` |
+| 方向键极简演讲 | `dir-key-nav-minimal` |
 
-**Smooth navigation**: on slide change, the presenter window sends `postMessage({type:'preview-goto', idx:N})` to each iframe. The iframe just toggles `.is-active` between slides — **no reload, no flicker**. The two windows also stay in sync via `BroadcastChannel`.
+### Step 2: Confirm theme
 
-Only `presenter-mode-reveal` is designed from the ground up around the feature with proper example 逐字稿 on every slide.
+Choose from the 36 themes based on audience + tone:
 
-Keyboard in presenter window: `← →` navigate (syncs audience) · `R` reset timer · `Esc` close popup.
-Keyboard in audience window: `S` open presenter · `T` cycle theme · `← →` navigate (syncs presenter) · `F` fullscreen · `O` overview.
+- **工程师 / 开发者** → `tokyo-night` / `catppuccin-mocha` / `dracula` / `terminal-green`
+- **设计师 / 产品经理** → `editorial-serif` / `aurora` / `soft-pastel` / `glassmorphism`
+- **管理层 / 投资人** → `corporate-clean` / `minimal-white` / `pitch-deck-vc` / `swiss-grid`
+- **小红书 / 消费者** → `xiaohongshu-white` / `soft-pastel` / `rainbow-gradient` / `magazine-bold`
+- **学术 / 研究报告** → `academic-paper` / `engineering-whiteprint` / `nord`
+- **赛博 / 黑客 / 发布会** → `cyberpunk-neon` / `vaporwave` / `neo-brutalism`
 
-## Before you author anything — ALWAYS ask or recommend
+Offer 2-3 candidates and let the user pick.
+Set `data-themes="a,b,c"` on `<body>` so T key cycles through all offered options.
 
-**Do not start writing slides until you understand three things.** Either ask
-the user directly, or — if they already handed you rich content — propose a
-tasteful default and confirm.
+### Step 3: Agree on slide count
 
-1. **Content & audience.** What's the deck about, how many slides, who's
-   watching (engineers / execs / 小红书读者 / 学生 / VC)?
-2. **Style / theme.** Which of the 36 themes fits? If unsure, recommend 2-3
-   candidates based on tone:
-   - Business / investor pitch → `pitch-deck-vc`, `corporate-clean`, `swiss-grid`
-   - Tech sharing / engineering → `tokyo-night`, `dracula`, `catppuccin-mocha`,
-     `terminal-green`, `blueprint`
-   - 小红书图文 → `xiaohongshu-white`, `soft-pastel`, `rainbow-gradient`,
-     `magazine-bold`
-   - Academic / report → `academic-paper`, `editorial-serif`, `minimal-white`
-   - Edgy / cyber / launch → `cyberpunk-neon`, `vaporwave`, `y2k-chrome`,
-     `neo-brutalism`
-3. **Starting point.** One of the 14 full-deck templates, or scratch? Point
-   to the closest `templates/full-decks/<name>/` and ask if it fits. If the
-   user's content suggests something obvious (e.g. "我要做产品发布会" →
-   `product-launch`), propose it confidently instead of asking blindly.
+Estimate from duration:
+- 5 min talk → 4–6 slides
+- 20 min talk → 8–12 slides
+- 45 min talk → 12–16 slides
+- 1 hour talk → 16–22 slides
+- Static deck / 小红书图文 → 6–12 slides (no hard limit)
 
-A good opening message looks like:
+Confirm this before scaffolding.
 
-> 我可以给你做这份 PPT！先确认三件事：
-> 1. 大致内容 / 页数 / 观众是谁？
-> 2. 风格偏好？我建议从这 3 个主题里选一个：`tokyo-night`（技术分享默认好看）、`xiaohongshu-white`（小红书风）、`corporate-clean`（正式汇报）。
-> 3. 要不要用我现成的 `tech-sharing` 全 deck 模板打底？
+### Step 4: Draft the outline (recommended for non-trivial decks)
 
-Only after those are clear, scaffold the deck and start writing.
+Propose a slide structure before writing any HTML:
+```
+cover → [toc] → section-1 → [2-4 content] → section-2 → [2-4 content] → … → cta → thanks
+```
+Name each slide: "Slide 3: 问题背景", "Slide 7: 方案架构".
+This catches scope creep before any HTML is written.
+
+A good intake confirmation message looks like:
+
+> 我可以帮你做这份 PPT！先确认四件事：
+> 1. **用途 / 时长**：技术分享，约 20 分钟，对吧？
+> 2. **受众**：团队内部工程师？
+> 3. **风格**：我建议用 `tokyo-night`（深色技术风），备选 `corporate-clean`（浅色正式）。你倾向哪个？
+> 4. **页数**：预计 8–10 页左右，先按这个做，有问题再调整。
+>
+> 确认后我就开始动手。
+
+Only proceed to scaffold after user confirmation (or if user explicitly says "做吧，不用确认了").
+
+## 🧭 Layout Selection Guide
+
+For each slide, pick exactly ONE layout. Never use the same layout for two consecutive content slides.
+
+### Decision tree
+
+```
+开篇页？
+└── cover.html                          (大标题 + 副标题 + kicker pill)
+
+目录页？
+└── toc.html                            (2×3 编号卡片网格)
+
+章节分隔？
+└── section-divider.html                (大字编号 + 章节名)
+
+内容页？
+├── 文字为主（bullet list）？
+│   └── bullets.html
+├── 两栏对比（概念 + 示例）？
+│   └── two-column.html
+├── 三栏并排（三个支柱）？
+│   └── three-column.html
+└── 一段话引用？
+    └── big-quote.html
+
+数据页？
+├── 一个超大数字 + 说明？
+│   └── stat-highlight.html            (配 .counter 动画)
+├── 4 个 KPI 卡片？
+│   └── kpi-grid.html
+├── 表格数据？
+│   └── table.html
+└── 图表？
+    ├── 柱状图 → chart-bar.html
+    ├── 折线图 → chart-line.html
+    ├── 饼图 → chart-pie.html
+    └── 雷达图 → chart-radar.html
+
+代码 / 终端？
+├── 语法高亮代码 → code.html            (highlight.js)
+├── 差异化视图 → diff.html              (+/- 对比)
+└── 终端窗口 → terminal.html            (模拟 terminal chrome)
+
+图解 / 流程？
+├── 流程图（5节点管道）？
+│   └── flow-diagram.html
+├── 架构图（3层网格）？
+│   └── arch-diagram.html
+├── 思维导图（SVG 动画）？
+│   └── mindmap.html
+├── 时间线（横向）？
+│   └── timeline.html
+├── 路线图（NOW/NEXT/LATER）？
+│   └── roadmap.html
+├── 甘特图（12周多轨）？
+│   └── gantt.html
+└── 步骤图（4步卡片）？
+    └── process-steps.html
+
+对比 / 决策？
+├── Before / After？
+│   └── comparison.html
+├── 优缺点？
+│   └── pros-cons.html
+└── Checklist？
+    └── todo-checklist.html
+
+视觉页？
+├── 全幅图片 + 文字叠加？
+│   └── image-hero.html                (Ken Burns 动效背景)
+└── 图片网格（Bento 布局）？
+    └── image-grid.html
+
+结尾页？
+├── 行动号召（CTA）？
+│   └── cta.html
+└── 感谢页？
+    └── thanks.html                     (confetti burst 动画)
+```
+
+**`bullets.html` is the safest fallback for generic content.**
 
 ## Quick start
 
@@ -103,19 +238,17 @@ Only after those are clear, scaffold the deck and start writing.
    ```html
    <link rel="stylesheet" id="theme-link" href="../assets/themes/aurora.css">
    ```
-   Catalog in [references/themes.md](references/themes.md).
+   See the Quick Catalog above for all 36 theme names.
 3. **Pick layouts.** Copy `<section class="slide">...</section>` blocks out of
    files in `templates/single-page/` into your deck. Replace the demo data.
-   Catalog in [references/layouts.md](references/layouts.md).
+   See the Layout Selection Guide above to pick the right one.
 4. **Add animations.** Put `data-anim="fade-up"` (or `class="anim-fade-up"`) on
    any element. On `<ul>`/grids, use `anim-stagger-list` for sequenced reveals.
    For canvas FX, use `<div data-fx="knowledge-graph">...</div>` and include
    `<script src="../assets/animations/fx-runtime.js"></script>`.
-   Catalog in [references/animations.md](references/animations.md).
 5. **Use a full-deck template.** Copy `templates/full-decks/<name>/` into
    `examples/my-talk/` as a starting point. Each folder is self-contained with
-   scoped CSS. Catalog in [references/full-decks.md](references/full-decks.md)
-   and gallery at `templates/full-decks-index.html`.
+   scoped CSS. Gallery at `templates/full-decks-index.html`.
 6. **Render to PNG.**
    ```bash
    ./scripts/render.sh templates/theme-showcase.html       # one shot
@@ -145,6 +278,119 @@ Only after those are clear, scaffold the deck and start writing.
   `<p>` / `<span>` elements on the slide. The `.notes` class is `display:none`
   by default — it only appears in the S overlay. Slides should contain ONLY
   audience-facing content (titles, bullet points, data, charts, images).
+
+## ✅ Deck QA Checklist — 交付前自审
+
+**Before reporting the deck as done, verify every item below.
+Fix any item that fails before delivery.**
+
+### Content QA
+- [ ] Every slide has a `data-title` attribute.
+- [ ] No slide contains more than **6 bullet points**.
+- [ ] No slide contains a visible paragraph longer than **3 lines** (split or move to notes).
+- [ ] No raw hex colors in markup — all colors use `var(--text-1)`, `var(--accent)`, etc.
+- [ ] Every `<section class="slide">` has exactly one layout class (not multiple competing ones).
+- [ ] No `.notes` content accidentally visible to audience (`.notes { display:none }` not overridden).
+
+### Presenter Mode QA (only if using presenter mode)
+- [ ] Every slide has an `<aside class="notes">` or `<div class="notes">`.
+- [ ] Each notes block is **150–300 Chinese characters**.
+  Run this to check:
+  ```bash
+  python3 -c "import re; html=open('index.html').read(); notes=re.findall(r'<aside class="notes">(.*?)</aside>',html,re.DOTALL); [print(f'notes len={len(n.strip())}: {n.strip()[:50]}') for n in notes]"
+  ```
+  Flag any with len < 150 or len > 300.
+- [ ] Notes use **spoken Chinese** — no "因此" / "该" / "进行" / "综上所述".
+- [ ] Keywords in notes are wrapped in `<strong>`.
+- [ ] Transition sentences are standalone paragraphs.
+- [ ] `runtime.js` is included (`<script src="../assets/runtime.js">`).
+
+### Technical QA
+- [ ] `← →` / `Space` navigation works.
+- [ ] Press `T` — theme cycling works (if `data-themes` set).
+- [ ] Press `O` — overview grid shows all slides without clipping.
+- [ ] Press `F` — fullscreen works.
+- [ ] No broken resource paths (fonts.css, base.css, runtime.js, theme link).
+- [ ] All `<script>` tags are before `</body>`.
+- [ ] If `data-fx` used — canvas FX renders without console errors.
+- [ ] If `xhs-post` template — viewport is `810×1080` (3:4 portrait).
+
+### File delivery QA
+- [ ] Output is at `examples/<deck-name>/index.html`.
+- [ ] PNG render succeeds if export was requested.
+- [ ] File is self-contained (only CDN webfonts + optional CDN highlight.js/chart.js).
+- [ ] You tell the user where the file is and how to open it.
+
+### QA failure handling
+If any item fails: fix it immediately, re-run the check, report what you fixed.
+
+## 🎤 Presenter Mode — Step-by-Step Workflow
+
+When the user needs speaker notes / 逐字稿 / 演讲者视图, follow this exact sequence:
+
+### Step 1: Template selection
+```bash
+cp -r templates/full-decks/presenter-mode-reveal examples/<deck-name>
+```
+
+### Step 2: Customize theme
+Edit `data-themes` on `<html>` to list 2-5 candidate themes.
+Default: tokyo-night · dracula · catppuccin-mocha · nord · corporate-clean.
+Set active theme via `<link id="theme-link" href="…/assets/themes/tokyo-night.css">`.
+
+### Step 3: Write slide content
+Replace content in each `<section class="slide">` block.
+**Keep slides clean — audience sees only what's on the slide.**
+Do NOT put speaker cues, transition prompts, or explanatory notes on the slide body.
+
+### Step 4: Write 逐字稿 in `<aside class="notes">`
+
+**Three rules (non-negotiable):**
+
+**Rule 1 — Prompt signals, not lines:**
+```html
+<!-- ❌ WRONG — reads like a script -->
+<p>大家好，欢迎来到今天的分享。今天我将要给大家介绍一下我们团队在过去三个月做的工作。</p>
+
+<!-- ✅ RIGHT — bold keywords, transitions as separate paragraphs -->
+<p>欢迎！今天分享我们团队<strong>过去 3 个月</strong>的工作。</p>
+<p>先说<em>背景</em>——三个月前我们遇到了<strong>三个核心问题</strong>：延迟高、成本炸、稳定性差。</p>
+<p>接下来逐个讲解怎么解的。</p>
+```
+
+**Rule 2 — 150–300 characters per slide:**
+Count characters (not words) in each notes block.
+Flag anything outside this range — too short = insufficient prompts, too long = can't scan.
+
+**Rule 3 — Spoken Chinese, not written Chinese:**
+
+| ❌ Avoid | ✅ Use instead |
+|---|---|
+| 因此、所以、于是 | 然后、接下来、这样 |
+| 该方案、本产品、本系统 | 这个方案、我们这个、它 |
+| 进行（优化/分析/评估） | 优化、分析、评估 |
+| 综上所述、总之 | 简单来说、也就是说 |
+| 然而（书面） | 但是（口语）、不过 |
+
+### Step 5: Verify
+After writing all notes, check character count per block:
+```bash
+python3 -c "
+import re
+html = open('examples/<deck-name>/index.html').read()
+notes = re.findall(r'<aside class="notes">(.*?)</aside>', html, re.DOTALL)
+for i, n in enumerate(notes, 1):
+    stripped = n.strip()
+    chars = len(stripped)
+    print(f'Slide {i}: {chars} chars  [{"OK" if 150<=chars<=300 else "FLAGGED"}]  {stripped[:60]}')
+"
+```
+
+### Step 6: Report to user
+Tell the user:
+- File location: `examples/<deck-name>/index.html`
+- Press `S` to open presenter window
+- `← →` syncs both windows; `F` fullscreens audience view
 
 ## Writing guide
 
@@ -220,4 +466,4 @@ Esc                                     close all overlays
 
 ## License & author
 
-MIT. Copyright (c) 2026 lewis &lt;sudolewis@gmail.com&gt;.
+MIT. Copyright (c) 2026 lewis <sudolewis@gmail.com>.
